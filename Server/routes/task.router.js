@@ -75,7 +75,7 @@ taskRouter.put('/incomplete/:id', (req, res) => {
 
 // DELETE
 
-taskRouter.delete('/incomplete/:id', (req, res) => {
+taskRouter.delete('/:id', (req, res) => {
     console.log('DELETE REQUEST req.params.id:', req.params.id);
     let queryText = `DELETE "tasks" WHERE id=$1;`;
     pool.query(queryText, [req.params.id])
