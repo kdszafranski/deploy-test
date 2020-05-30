@@ -23,20 +23,18 @@ taskRouter.get('/', (req, res) => {
 // POST
 taskRouter.post('/', (req, res) => {
     console.log('req.body', req.body);
-    let name = req.body.name;
-    let age = req.body.age;
-    let gender = req.body.gender;
-    let readyForTransfer = req.body.readyForTransfer;
-    let notes = req.body.notes;
+    let task = req.body.task;
+    let date = req.body.date;
+    let status = req.body.status;
 
 
     let queryText = `
-    INSERT INTO "koalas" ("name", "gender", "age", "ready_to_transfer", "notes")
-    VALUES ($1, $2, $3, $4, $5);`
+    INSERT INTO "tasks" ("task", "date", "status")
+    VALUES ($1, $2, $3);`
 
     console.log("query is", queryText);
 
-    pool.query(queryText, [name, gender, age, readyForTransfer, notes])
+    pool.query(queryText, [task, date, status])
         .then((result) => {
             res.sendStatus(201);
         })
@@ -47,9 +45,23 @@ taskRouter.post('/', (req, res) => {
 });
 
 // PUT
-taskRouter.put('/:id', (req, res) => {
+taskRouter.put('/complete/:id', (req, res) => {
     console.log('PUT REQUEST req.params.id:', req.params.id);
-    let queryText = `UPDATE "koalas" SET "ready_to_transfer" = 'Y' WHERE id=$1;`;
+    let queryText = `UPDATE "tasks" SET "status" = 'Complete' WHERE id=$1;`;
+    pool.query(queryText, [req.params.id])
+        .then((result) => {
+            console.log('SUCCESSFUL put:', result);
+            res.sendStatus(200);
+        })
+        .catch((err) => {
+            console.log('ERROR put:', err);
+            res.sendStatus(500);
+        })
+});
+
+taskRouter.put('/incomplete/:id', (req, res) => {
+    console.log('PUT REQUEST req.params.id:', req.params.id);
+    let queryText = `UPDATE "tasks" SET "status" = 'Complete' WHERE id=$1;`;
     pool.query(queryText, [req.params.id])
         .then((result) => {
             console.log('SUCCESSFUL put:', result);
@@ -63,4 +75,18 @@ taskRouter.put('/:id', (req, res) => {
 
 // DELETE
 
-module.exports = koalaRouter;
+taskRouter.delete('/incomplete/:id', (req, res) => {
+    console.log('DELETE REQUEST req.params.id:', req.params.id);
+    let queryText = `DELETE "tasks" WHERE id=$1;`;
+    pool.query(queryText, [req.params.id])
+        .then((result) => {
+            console.log('SUCCESSFUL put:', result);
+            res.sendStatus(200);
+        })
+        .catch((err) => {
+            console.log('ERROR put:', err);
+            res.sendStatus(500);
+        })
+});
+
+module.exports = taskRouter;

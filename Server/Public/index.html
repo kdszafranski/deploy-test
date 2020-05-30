@@ -2,7 +2,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title></title>
+        <title>To Do List</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="style.css">
@@ -11,7 +11,21 @@
         <script src="client.js"></script>
     </head>
     <body>
-        
+        <h1>To Do List:</h1>
+        <section>
+            <h2>Add Task:</h2>
+            <label for="task">Enter Task:</label>
+            <input type="text" placeholder="Task" id="taskInput">
+            <label for="task">Enter Due Date:</label>
+            <input type="date" id="date">
+            <button id="addTask">Add Task</button>
+        </section>
+
+        <div id="tasksOutput">
+            <ul id="tasksList">
+
+            </ul>
+        </div>
         
        
     </body>
