@@ -22,6 +22,7 @@ $.ajax({
 
 function displayTasks(data){
     console.log('in display tasks');
+    $('#tasksList').empty();
     let task = data.task;
     let dueDate = data.date;
     let status = data.status;
@@ -60,21 +61,24 @@ $.ajax({
 }).then((response) => {
     console.log('response:', response)
     getTasks();
+    let task = $('#taskInput').val('');
+    let date = $('#date').val('');
 }).catch((error)=> {
     console.log('Post failed', error)
 })
 }
 
 function deleteTask(){
-    let id = $(this).data('id')
-    console.log('id:', id)
+    let id = $(this).data('id');
+    console.log('id:', id);
 
     $.ajax({
-        method: 'DELETE',
+        method: "DELETE",
         url: `/tasks/${id}`    
     }).then((response) => {
         console.log('response:', response);
+        getTasks();
     }).catch((error)=> {
-        console.log('Delete error:', error);
+        console.log('Delete', error);
     })
 }

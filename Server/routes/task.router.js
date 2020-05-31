@@ -54,7 +54,7 @@ taskRouter.put('/complete/:id', (req, res) => {
             res.sendStatus(200);
         })
         .catch((err) => {
-            console.log('ERROR put:', err);
+            console.log('PUT request error', err);
             res.sendStatus(500);
         })
 });
@@ -68,7 +68,7 @@ taskRouter.put('/incomplete/:id', (req, res) => {
             res.sendStatus(200);
         })
         .catch((err) => {
-            console.log('ERROR put:', err);
+            console.log('PUT request error:', err);
             res.sendStatus(500);
         })
 });
@@ -77,14 +77,14 @@ taskRouter.put('/incomplete/:id', (req, res) => {
 
 taskRouter.delete('/:id', (req, res) => {
     console.log('DELETE REQUEST req.params.id:', req.params.id);
-    let queryText = `DELETE "tasks" WHERE id=$1;`;
+    let queryText = `DELETE FROM "tasks" WHERE id=$1;`;
     pool.query(queryText, [req.params.id])
         .then((result) => {
-            console.log('SUCCESSFUL put:', result);
+            console.log('Successful delete:', result);
             res.sendStatus(200);
         })
         .catch((err) => {
-            console.log('ERROR put:', err);
+            console.log('Delete error:', err);
             res.sendStatus(500);
         })
 });
