@@ -28,8 +28,6 @@ color: white;
   padding: 8px;
 }
 
-/* #taskTable tr:nth-child(even){background-color: #f2f2f2;} */
-
 #taskTable tr:hover {background-color: #ddd;}
 
 #taskTable th {

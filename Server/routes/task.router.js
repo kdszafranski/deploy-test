@@ -2,12 +2,9 @@ const express = require('express');
 const taskRouter = express.Router();
 const pool = require('../modules/pool.js')
 
-// DB CONNECTION
 
-
-
-// GET
 taskRouter.get('/', (req, res) => {
+
     let queryText = 'SELECT * FROM "tasks";'
 
     pool.query(queryText)
@@ -15,14 +12,14 @@ taskRouter.get('/', (req, res) => {
             res.send(result.rows);
         })
         .catch((err) => {
-            console.log("error making query", err);
+            console.log("Error making query", err);
             res.sendStatus(500);
         })
 });
 
-// POST
+
 taskRouter.post('/', (req, res) => {
-    console.log('req.body', req.body);
+    
     let task = req.body.task;
     let date = req.body.date;
     let status = req.body.status;
@@ -32,59 +29,59 @@ taskRouter.post('/', (req, res) => {
     INSERT INTO "tasks" ("task", "date", "status")
     VALUES ($1, $2, $3);`
 
-    console.log("query is", queryText);
-
     pool.query(queryText, [task, date, status])
         .then((result) => {
             res.sendStatus(201);
         })
         .catch((err) => {
-            console.log('error making post request', err);
+            console.log('Error handling post request', err);
             res.sendStatus(500);
         })
 });
 
-// PUT
+
 taskRouter.put('/complete/:id', (req, res) => {
-    console.log('PUT REQUEST req.params.id:', req.params.id);
+    
     let queryText = `UPDATE "tasks" SET "status" = 'Complete' WHERE id=$1;`;
+
     pool.query(queryText, [req.params.id])
         .then((result) => {
-            console.log('SUCCESSFUL complete put:', result);
+            console.log('Successful PUT handling', result);
             res.sendStatus(200);
         })
         .catch((err) => {
-            console.log('PUT request', err);
+            console.log('PUT request handling failed', err);
             res.sendStatus(500);
         })
 });
 
 taskRouter.put('/incomplete/:id', (req, res) => {
-    console.log('PUT REQUEST req.params.id:', req.params.id);
+    
     let queryText = `UPDATE "tasks" SET "status" = 'Incomplete' WHERE id=$1;`;
+
     pool.query(queryText, [req.params.id])
         .then((result) => {
-            console.log('SUCCESSFUL incomplete put:', result);
+            console.log('Successful PUT request handling', result);
             res.sendStatus(200);
         })
         .catch((err) => {
-            console.log('PUT request', err);
+            console.log('PUT request handling failed.', err);
             res.sendStatus(500);
         })
 });
 
-// DELETE
 
 taskRouter.delete('/:id', (req, res) => {
-    console.log('DELETE REQUEST req.params.id:', req.params.id);
+    
     let queryText = `DELETE FROM "tasks" WHERE id=$1;`;
+
     pool.query(queryText, [req.params.id])
         .then((result) => {
-            console.log('Successful delete:', result);
+            console.log('Successful DELETE request handling:', result);
             res.sendStatus(200);
         })
         .catch((err) => {
-            console.log('Delete error:', err);
+            console.log('DELETE request handling failed', err);
             res.sendStatus(500);
         })
 });

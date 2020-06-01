@@ -1,37 +1,38 @@
 $(document).ready(readyNow);
 
 function readyNow(){
-    console.log("ready for anything")
+
     getTasks();
+
     $('#addTaskButton').on('click', addTask);
     $('#tasksList').on('click', '.deleteButton', deleteTask)
     $('#tasksList').on('click', 'input[type="checkbox"]', completeTask); 
 }
 
 function getTasks(){
-$.ajax({
-    method: "GET",
-    url: "/tasks"
-}).then((data) => {
-    console.log(data);
-    displayTasks(data);
-})
-.catch((error)=> {
-    console.log('error:', error)
-})
-}
+
+    $.ajax({
+        method: "GET",
+        url: "/tasks"
+    }).then((data) => {
+        console.log('GET request successful');
+        displayTasks(data);
+    })
+    .catch((error)=> {
+        console.log('GET request failure', error)
+    })
+    }
 
 function displayTasks(data){
 
-    console.log('in display tasks');
     $('#tasksList').empty();
 
     let task = data.task;
     let dueDate = data.date;
     let status = data.status;
 
-        for (i=0;i<data.length;i++){
-            if (data[i].status == 'Incomplete'){
+    for (i=0;i<data.length;i++){
+        if (data[i].status == 'Incomplete'){
             $('#tasksList').append(`
                 <tr id="incomplete">
                     <td>${data[i].task}</td>
@@ -42,7 +43,7 @@ function displayTasks(data){
                 </tr>`
             )
         }
-            else if (data[i].status == 'Complete') {
+        else if (data[i].status == 'Complete') {
                 $('#tasksList').append(`
                     <tr id="complete">
                         <td>${data[i].task}</td>
@@ -52,13 +53,14 @@ function displayTasks(data){
                         <td><input type="checkbox" data-id=${data[i].id} checked></td> 
                     </tr>`
                 )
-            }
+        }
     }
 }
 
 
 
 function addTask(){
+
 let task = $('#taskInput').val();
 let date = $('#date').val();
 let status = "Incomplete";
@@ -71,30 +73,29 @@ $.ajax({
         task: task,
         date: date,
         status: status
-
     }
 }).then((response) => {
-    console.log('response:', response)
+    console.log('POST request response:', response)
     getTasks();
     let task = $('#taskInput').val('');
     let date = $('#date').val('');
 }).catch((error)=> {
-    console.log('Post failed', error)
+    console.log('Post request failed', error)
 })
 }
 
 function deleteTask(){
+
     let id = $(this).data('id');
-    console.log('id:', id);
 
     $.ajax({
         method: "DELETE",
         url: `/tasks/${id}`    
     }).then((response) => {
-        console.log('response:', response);
+        console.log('DELETE request response:', response);
         getTasks();
     }).catch((error)=> {
-        console.log('Delete', error);
+        console.log('DELETE request failed', error);
     })
 }
 
@@ -104,7 +105,6 @@ function completeTask(){
     let task = $(this).data('id')
 
     if ($(this).prop("checked") == true) {
-        console.log("Checkbox is checked.");
 
         $.ajax({
             method: "PUT",
@@ -113,11 +113,11 @@ function completeTask(){
             console.log("Successful PUT request", response)
             getTasks();
         }).catch((error) => {
-            console.log("PUT request failure.", error)
+            console.log("PUT request failed", error)
         })
     }
+
     else if ($(this).prop("checked") == false) {
-        console.log("Checkbox is unchecked.");
 
         $.ajax({
             method: "PUT",
@@ -126,7 +126,7 @@ function completeTask(){
             console.log("Successful PUT request", response)
             getTasks();
         }).catch((error)=> {
-            console.log("PUT request failure.", error)
+            console.log("PUT request failed", error)
         })
     }
 }
