@@ -50,25 +50,25 @@ taskRouter.put('/complete/:id', (req, res) => {
     let queryText = `UPDATE "tasks" SET "status" = 'Complete' WHERE id=$1;`;
     pool.query(queryText, [req.params.id])
         .then((result) => {
-            console.log('SUCCESSFUL put:', result);
+            console.log('SUCCESSFUL complete put:', result);
             res.sendStatus(200);
         })
         .catch((err) => {
-            console.log('PUT request error', err);
+            console.log('PUT request', err);
             res.sendStatus(500);
         })
 });
 
 taskRouter.put('/incomplete/:id', (req, res) => {
     console.log('PUT REQUEST req.params.id:', req.params.id);
-    let queryText = `UPDATE "tasks" SET "status" = 'Complete' WHERE id=$1;`;
+    let queryText = `UPDATE "tasks" SET "status" = 'Incomplete' WHERE id=$1;`;
     pool.query(queryText, [req.params.id])
         .then((result) => {
-            console.log('SUCCESSFUL put:', result);
+            console.log('SUCCESSFUL incomplete put:', result);
             res.sendStatus(200);
         })
         .catch((err) => {
-            console.log('PUT request error:', err);
+            console.log('PUT request', err);
             res.sendStatus(500);
         })
 });
