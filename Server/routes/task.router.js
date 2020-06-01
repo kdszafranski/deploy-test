@@ -3,6 +3,7 @@ const taskRouter = express.Router();
 const pool = require('../modules/pool.js')
 
 
+// GET request handling returns all database data
 taskRouter.get('/', (req, res) => {
 
     let queryText = 'SELECT * FROM "tasks";'
@@ -18,6 +19,7 @@ taskRouter.get('/', (req, res) => {
 });
 
 
+// POST request handling inserts new row into database table
 taskRouter.post('/', (req, res) => {
     
     let task = req.body.task;
@@ -40,6 +42,7 @@ taskRouter.post('/', (req, res) => {
 });
 
 
+// PUT request handling updates the status property 
 taskRouter.put('/complete/:id', (req, res) => {
     
     let queryText = `UPDATE "tasks" SET "status" = 'Complete' WHERE id=$1;`;
@@ -55,6 +58,8 @@ taskRouter.put('/complete/:id', (req, res) => {
         })
 });
 
+
+// PUT request handling updates the status property
 taskRouter.put('/incomplete/:id', (req, res) => {
     
     let queryText = `UPDATE "tasks" SET "status" = 'Incomplete' WHERE id=$1;`;
@@ -71,6 +76,7 @@ taskRouter.put('/incomplete/:id', (req, res) => {
 });
 
 
+// DELETE request handling deletes an object from the database
 taskRouter.delete('/:id', (req, res) => {
     
     let queryText = `DELETE FROM "tasks" WHERE id=$1;`;
