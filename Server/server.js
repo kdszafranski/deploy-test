@@ -1,3 +1,4 @@
+// importing modules
 const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
@@ -7,6 +8,7 @@ const taskRouter = require('./routes/task.router.js')
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static('Server/Public'));
 
+// diverting traffic to taskRouter as defined above
 app.use('/tasks', taskRouter)
 
 app.listen(PORT, () => {
