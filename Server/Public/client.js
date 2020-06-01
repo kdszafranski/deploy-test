@@ -5,7 +5,6 @@ function readyNow(){
     getTasks();
     $('#addTaskButton').on('click', addTask);
     $('#tasksList').on('click', '.deleteButton', deleteTask)
-    // $('#tasksList').prop('checked', '.markComplete', completeTask);
     $('#tasksList').on('click', 'input[type="checkbox"]', completeTask); 
 }
 
@@ -33,27 +32,25 @@ function displayTasks(data){
 
         for (i=0;i<data.length;i++){
             if (data[i].status == 'Incomplete'){
-            $('#tasksList').append(
-            `<li>
-            ${data[i].task}
-            ${data[i].date}
-            ${data[i].status}
-            <button class="deleteButton" data-id=${data[i].id}>Delete Task</button> 
-            <label for="markComplete">Mark Complete:</label>
-            <input type="checkbox" "class="markComplete" data-id=${data[i].id}> 
-            </li>`
+            $('#tasksList').append(`
+                <tr id="incomplete">
+                    <td>${data[i].task}</td>
+                    <td>${data[i].date}</td>
+                    <td>${data[i].status}</td>
+                    <td><button class="deleteButton" data-id=${data[i].id}>Delete</button></td> 
+                    <td><input type="checkbox" data-id=${data[i].id}></td> 
+                </tr>`
             )
         }
             else if (data[i].status == 'Complete') {
-                $('#tasksList').append(
-                    `<li>
-                ${data[i].task}
-                ${data[i].date}
-                ${data[i].status}
-                <button class="deleteButton" data-id=${data[i].id}>Delete Task</button> 
-                <label for="markComplete">Mark Complete:</label>
-                <input type="checkbox" "class="markComplete" data-id=${data[i].id} checked> 
-                </li>`
+                $('#tasksList').append(`
+                    <tr id="complete">
+                        <td>${data[i].task}</td>
+                        <td>${data[i].date}</td>
+                        <td>${data[i].status}</td>
+                        <td><button class="deleteButton" data-id=${data[i].id}>Delete</button></td>
+                        <td><input type="checkbox" data-id=${data[i].id} checked></td> 
+                    </tr>`
                 )
             }
     }

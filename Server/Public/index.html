@@ -12,7 +12,7 @@
     </head>
     <body>
         <h1>To Do List:</h1>
-        <section>
+        <section id="inputArea">
             <label for="task">Enter Task:</label>
             <input type="text" placeholder="Task" id="taskInput">
             <label for="task">Enter Due Date:</label>
@@ -20,10 +20,19 @@
             <button id="addTaskButton">Add Task</button>
         </section>
 
-        <div>
-            <ul id="tasksList">
-            </ul>
-        </div>
+        <table id="taskTable">
+            <thead>
+                <tr>
+                    <th>Task:</th>
+                    <th>Due Date:</th>
+                    <th>Status:</th>
+                    <th>Delete:</th>
+                    <th>Mark Complete:</th>
+                </tr>
+            </thead>
+            <tbody id="tasksList">
+            </tbody>
+        </table>
         
        
     </body>

@@ -1,3 +1,49 @@
 h1 {
-    align-content: center;
+padding-top: 12px;
+padding-bottom: 12px;
+text-align: center;
+background-color: #4CAF50;
+color: white;
+}
+
+#inputArea {
+font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+border: 1px solid #ddd;
+padding-top: 12px;
+padding-bottom: 12px;
+text-align: center;
+background-color: #4CAF50;
+color: white;
+}
+
+#taskTable {
+  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  text-align: center;
+  width: 100%;
+}
+
+#taskTable td, #taskTable th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+/* #taskTable tr:nth-child(even){background-color: #f2f2f2;} */
+
+#taskTable tr:hover {background-color: #ddd;}
+
+#taskTable th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: center;
+  background-color: #4CAF50;
+  color: white;
+}
+
+#complete {
+    background-color: #4CAF50;
+}
+
+#incomplete  {
+    background-color: rgb(150, 22, 5);
 }
