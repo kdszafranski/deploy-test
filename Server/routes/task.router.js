@@ -2,7 +2,6 @@ const express = require('express');
 const taskRouter = express.Router();
 const pool = require('../modules/pool.js')
 
-
 // GET request handling returns all database data
 taskRouter.get('/', (req, res) => {
 
