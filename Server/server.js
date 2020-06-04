@@ -1,7 +1,7 @@
 // importing modules
-const express = require('express');
+const express = require('./node_modules/express');
 const app = express();
-const bodyParser = require('body-parser');
+const bodyParser = require('./node_modules/body-parser');
 const PORT = process.env.PORT || 5000;
 const taskRouter = require('./routes/task.router.js')
 

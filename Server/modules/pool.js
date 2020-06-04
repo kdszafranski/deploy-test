@@ -1,5 +1,5 @@
 // importing pg module
-const pg = require('pg');
+const pg = require('./node_modules/pg');
 const Pool = pg.Pool;
 const url = require('url');
 
